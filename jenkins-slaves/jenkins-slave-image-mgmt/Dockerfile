@@ -11,11 +11,8 @@ LABEL com.redhat.component="jenkins-slave-image-mgmt" \
 USER root
 
 RUN yum repolist > /dev/null && \
-    yum-config-manager --enable rhel-7-server-extras-rpms && \
-    yum clean all && \
-    INSTALL_PKGS="skopeo" && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
+    yum install -y --enablerepo rhel-7-server-extras-rpms skopeo && \
+    rpm -V skopeo && \
     yum clean all
 
 USER 1001
